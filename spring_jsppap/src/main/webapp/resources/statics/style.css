@@ -1,0 +1,15 @@
+body {
+   background-image: url('bgp.png');
+   background-repeat: no-repeat;
+   background-size: auto; /* 배경 이미지를 화면에 맞추도록 설정 */
+   background-position: center; /* 이미지를 화면 중앙에 배치 */
+   height: 95%;
+}
+.icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url('Group2.svg');
+    background-size: cover;
+    text-indent: -9999px; /* 아이콘 텍스트 숨기기 */
+}

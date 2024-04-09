@@ -1,0 +1,8 @@
+.icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url('Group2.svg');
+    background-size: cover;
+    text-indent: -9999px; /* 아이콘 텍스트 숨기기 */
+}

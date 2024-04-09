@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: calc(50% - 50px); /* 화면의 절반에서 10px 만큼 뺀 크기로 설정합니다. */
+  background-color: #f9f9f9; /* 배경색을 지정합니다. */
+  margin-left: 20px; /* 왼쪽에서 살짝 띄우기 위한 여백 설정 */
+  border-radius: 10px; /* 모서리를 둥글게 만듭니다. */
+  height: auto; /* 자식 요소의 크기에 맞게 부모 요소의 높이를 조절합니다. */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container > div {
+  flex: 1;
+}
+
+#content-container {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none; /* iframe의 기본 테두리를 제거합니다. */
+}
+th, td {
+  border: 1px solid #ccc; /* 셀 경계를 설정합니다. */
+  padding: 8px; /* 셀 안의 여백을 설정합니다. */
+  text-align: left; /* 셀 안의 텍스트를 가운데 정렬합니다. */
+}
+
+td input[type="text"],
+td input[type="number"] {
+  width: 90%;
+  padding: 8px;
+  background-color: inherit; /* 부모 요소의 배경색을 상속합니다. */
+  border: none; /* 테두리를 없앱니다. */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  background-color: #e0e0e0; /* 입력 칸이 포커스되었을 때의 배경색을 변경합니다. */
+}
+
+
+button {
+  padding: 10px 20px; /* 버튼의 여백을 설정합니다. */
+  margin-left: 10px; /* 테이블과 버튼 사이의 간격을 설정합니다. */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+table {
+  border-collapse: collapse; /* 테이블 셀 경계를 병합합니다. */
+  width: 90%;
+}
+th:nth-child(1) {
+  background-color: #E4E4E4; /* 첫 번째 열의 배경색을 설정합니다. */
+}
+
+th:nth-child(2) {
+  background-color: #E4E4E4; /* 두 번째 열의 배경색을 설정합니다. */
+}
+.table-container {
+  display: flex;
+  align-items: center; /* 요소들을 세로 중앙 정렬합니다. */
+}
+.current-time {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: calc(50% - 50px); 
+  background-color: #f9f9f9; /* 배경색을 지정합니다. */
+  margin-right: 20px; /* 왼쪽에서 살짝 띄우기 위한 여백 설정 */
+  border-radius: 10px; /* 모서리를 둥글게 만듭니다. */
+  height: auto; /* 자식 요소의 크기에 맞게 부모 요소의 높이를 조절합니다. */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  .current-time span {
+    font-weight: bold; /* 글꼴 굵게 설정 */
+  }
+  
+  

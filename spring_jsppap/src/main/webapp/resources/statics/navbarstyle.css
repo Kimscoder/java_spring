@@ -1,0 +1,104 @@
+.icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url('Group2.svg');
+    background-size: cover;
+    text-indent: -9999px; /* 아이콘 텍스트 숨기기 */
+}
+.aicon {
+    display: inline-block;
+    width: 818px;
+    height: 105px;
+    background-image: url('wfr.svg');
+    
+    text-indent: -9999px; /* 아이콘 텍스트 숨기기 */
+}
+.bicon {
+    display: inline-block;
+    width: 330px;
+    height: 105px;
+    background-image: url('Frame1.svg');
+    background-repeat: no-repeat;
+    text-indent: -9999px; /* 아이콘 텍스트 숨기기 */
+}
+.cicon {
+    display: inline-block;
+    width: 420px;
+    height: 105px;
+    background-image: url('Frame3.svg');
+    background-repeat: no-repeat;
+    text-indent: -9999px; /* 아이콘 텍스트 숨기기 */
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FBF6EF;
+  padding: 8px 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body { 
+  margin: 0;
+  
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.navbar__menu {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding-left: 0;
+}
+
+.navbar__menu li {
+  padding: 8px 30px;
+}
+
+
+.case1 {
+    display: inline-block;
+    width: 100px;
+    height: 80px;
+    background-image: url('Button.svg');
+    background-size: contain; /* 아이콘 비율 유지하며 크기 조정 */
+    background-repeat: no-repeat; /* 배경 이미지 반복 없애기 */
+    background-position: center; /* 아이콘 가운데 정렬 */
+    text-indent: -9999px; /* 아이콘 텍스트 숨기기 */
+    transition: background-color 0.3s ease; /* 변화를 부드럽게 만들기 위한 transition 속성 추가 */
+}
+
+.case1:hover {
+    background-color: #ccc; /* 마우스를 올렸을 때 배경색 변경 */
+}
+ .barcon {
+    display: inline-block;
+    width: 2px;
+    height: 114px;
+    background-image: url('Intersect.svg');
+    background-size: cover;
+    text-indent: -9999px; /* 아이콘 텍스트 숨기기 */
+    vertical-align: middle; /* 수직 정렬 */
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 5px; /* 바 위쪽 여백 조절 */
+    margin-bottom: 5px; /* 바 아래쪽 여백 조절 */
+  }
+.number-label {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 10px; /* 텍스트와 숫자 사이 간격 조절 */
+  }
+.footerbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FBF6EF;
+  padding: 8px 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
