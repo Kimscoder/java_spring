@@ -1,19 +1,93 @@
 package com.spring.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.spring.dao.memberDAO;
+import com.spring.dto.MenuVO;
+import com.spring.dto.memberVO;
+import com.spring.exception.InvalidPasswordException;
+import com.spring.exception.NotFoundIdentityException;
+import com.spring.service.MemberService;
+import com.spring.service.MenuService;
 
 @Controller
 public class loginController {
-
-	@GetMapping("/loginForm")
-	public ModelAndView registForm(ModelAndView mnv) throws Exception {
-		String url="/login/form";
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private memberDAO MemberDAO;
+	
+	@Autowired
+	private MenuService menuService;
+	@GetMapping("/index.do")
+	public ModelAndView main(String mCode,ModelAndView mnv)throws Exception{
+		String url="/pola/indexpage";
+		List<MenuVO> menuList = menuService.getMainMenuList();
+		
+		 if(mCode!=null) {
+		    	MenuVO menu= menuService.getMenuByMcode(mCode);
+		    	mnv.addObject("menu",menu);
+		    }
+		  
+		    
+			mnv.addObject("menuList",menuList);
+			mnv.setViewName(url);
+			return mnv;
+	}
+	@GetMapping("/main")
+	public ModelAndView mainhome(ModelAndView mnv)throws Exception{
+		String url ="/pola/main";
+		
 		mnv.setViewName(url);
 		return mnv;
 	}
-	
+	@GetMapping("/loginForm")
+	public ModelAndView registForm(ModelAndView mnv,String retUrl) throws Exception {
+		String url="/login/form";
+		mnv.addObject("retUrl",retUrl);
+		mnv.setViewName(url);
+		return mnv;
+	}
+	@PostMapping("/loginForm")
+	public ModelAndView loginPost(String id, String pwd,String retUrl,
+								  HttpSession session, 
+								  RedirectAttributes rttr,
+								  ModelAndView mnv)throws Exception{
+		String url="redirect:/index.do";
+		
+		try {
+			memberService.login(id, pwd);
+			
+			memberVO member = MemberDAO.selectMemberById(id);
+			session.setAttribute("loginUser", member);
+			session.setMaxInactiveInterval(30*60);
+			
+			session.getServletContext().setAttribute("loginUser", member.getId());
+		
+			if(retUrl != null && !retUrl.isEmpty()) {
+				url="redirect:"+retUrl;
+			}
+			
+		}catch(NotFoundIdentityException | InvalidPasswordException e) {
+			url="redirect:/common/loginForm?retUrl="+retUrl;
+			// rttr.addAttribute(attributeValue) : 주소줄 데이터 전달
+			rttr.addFlashAttribute("message",e.getMessage()); //requset 전달방식
+		}
+		
+		mnv.setViewName(url);
+		return mnv;
+	}
 	@GetMapping("/searchid")
 	public ModelAndView serchId(ModelAndView mnv)throws Exception{
 		String url = "/login/searchid";
@@ -40,9 +114,20 @@ public class loginController {
 	
 	@GetMapping("/common")
 	public ModelAndView main(ModelAndView mnv)throws Exception{
-		String url = "/pola/common";
+		String url = "/pola/indexpage";
 		
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
+	@GetMapping("/logout")
+	public ModelAndView logout(String id,HttpSession session, ModelAndView mnv)throws Exception{
+		String url="redirect:/loginForm";
+	
+		session.invalidate();
+		
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
 }

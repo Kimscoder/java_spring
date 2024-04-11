@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +29,14 @@
 						    <h3 class="" style="text-align:left; color: black; margin-left: 5px; margin-bottom: 0px;">Log in</h3>
 						</div>
 						<br/>
-                        <form action="../../index3.html" method="post">
+                        <form action="loginForm" method="post">
+                        	<input name="retUrl" value="${retUrl }" type="hidden"/>
                         	<div>Id
                         		<div style="font-size: 5px;"><br/></div>
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="id" class="form-control" placeholder="아이디를 입력해주세요">
+                                <input type="id" class="form-control" name="id"placeholder="아이디를 입력해주세요" value="">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -44,7 +46,7 @@
                             <div>Password</div>
                       		<div style="font-size: 5px;"><br/></div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="비밀번호를 입력해주세요">
+                                <input type="password" class="form-control" name="pwd" placeholder="비밀번호를 입력해주세요" value="">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         
@@ -92,5 +94,10 @@
     	<h2 style="color: brown">UNO Farm</h2>
 	</div>
 	<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+<c:if test="${not empty message }">
+<script>
+	alert("${message}");
+</script>
+</c:if>
 </body>
 </html>
