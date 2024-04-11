@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Notice-Mapper">
+  	
+  	<sql id="search">
+
+	<!-- t,c,ct,tcw -->
+  		<if test="searchType == 't'.toString()">
+  			and g_title like '%'||#{keyword}||'%'
+  		</if>
+  		
+		<if test="searchType == 'c'.toString()">
+			and g_content like '%'||#{keyword}||'%'
+		</if>  		
+		<if test="searchType == 'tc'.toString()">
+			and 
+			g_title like '%'||#{keyword}||'%'
+			or
+			g_content like '%'||#{keyword}||'%'
+			
+		</if>
+  	</sql>
+		
+  <!-- selectSearchNoticeList  -->
+  		<select id="selectSearchNoticeList" resultType="notice">		
+	select *
+		from(
+		    select rownum as rnum,SearchNoticeResult.*
+		    from ( 
+		    	select * 
+				from notice
+				where gno is not null
+				<include refid="search" />				
+				order by g_createDate desc
+		    )  SearchNoticeResult
+		    <![CDATA[
+		    where rownum <= #{endRow}		    
+		)		 
+		where rnum > #{startRow}		
+		 ]]>
+	</select>
+  	<!-- listCount -->
+  	<select id="selectSearchNoticeListCount" resultType="int">
+  		select 
+  		count(*)
+  		from notice 
+  		where gno is not null
+  		<include refid="search"/>
+  		order by g_createDate desc
+  	
+  	</select>
+  	<!-- selectNoticeByGno -->
+  	<select id ="selectNoticeByGno" parameterType="int" resultType="notice">
+  		select 
+  		*
+  		from notice 
+  		where gno=#{gno}
+  	</select>
+  	
+  	<!-- selectNoticeSequenceNextValue -->
+  	<select id="selectNoticeSequenceNextValue" resultType="int">
+  		select notice_seq.nextVal
+  		from dual
+  	</select>
+  <!-- increaseViewCount -->
+  	<update id="increaseViewCnt" parameterType="int">
+  		update notice 
+  		set g_viewCnt = g_viewCnt+1
+  		where gno=#{gno}
+  	</update>
+	
+  <!-- insertNotice -->
+	<update id="insertNotice" parameterType="notice">
+		insert into 
+		notice (gno,g_title,g_content)
+		values (#{gno},#{g_title},#{g_content})
+	
+	</update>  		
+  
+  <!-- updateNotice -->
+  	<update id="updateNotice" parameterType="notice">
+  		update notice 
+  		set 
+  		g_title=#{g_title},g_content=#{g_content}
+  		where gno=#{gno}
+  	</update>
+  
+  <!-- deleteNotice -->
+  	<update id="deleteNotice" parameterType="int">
+  		delete 
+  		from notice
+  		where gno = #{gno}
+  	
+  	
+  	</update>
+  
+  
+  </mapper>

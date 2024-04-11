@@ -29,7 +29,7 @@ public class LoginCheckFilter implements Filter {
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		
 		// 제외할 url 확인
-		String reqUrl = httpReq.getRequestURI().replace(httpReq.getContextPath(),"");
+		String reqUrl = httpReq.getRequestURI().replace(httpReq.getContextPath(),"/notice/list");
 		
 		if (excludeCheck(reqUrl)) {
 			chain.doFilter(request, response);
