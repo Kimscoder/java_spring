@@ -38,7 +38,7 @@ public class LoginCheckFilter implements Filter {
 			session.invalidate();
 
 			String retUrl = httpReq.getRequestURI();
-			String targetUrl = "/jsp/loginForm.do";
+			String targetUrl = "/loginForm.do";
 			
 			String queryString = httpReq.getQueryString();
 			if (queryString != null) {
@@ -50,7 +50,7 @@ public class LoginCheckFilter implements Filter {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('세션이 만료되었습니다.\\n다시 로그인 하세요.');");
-			out.println("window.parent.location.href='/jsp/loginForm.do?retUrl="+retUrl+"';");
+			out.println("window.parent.location.href='/uno/loginForm.do?retUrl="+retUrl+"';");
 			out.println("</script>");
 		}
 		

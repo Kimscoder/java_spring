@@ -36,7 +36,7 @@
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="name" class="form-control" placeholder="농장주명을 입력해주세요">
+                                <input type="name" class="form-control" placeholder="농장주명을 입력해주세요" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -48,7 +48,7 @@
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="phone" class="form-control" placeholder="'-'빼고 숫자만 입력">
+                                <input type="phone" class="form-control" placeholder="'-'빼고 숫자만 입력" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -60,7 +60,7 @@
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="name" class="form-control" placeholder="농장주명을 입력해주세요">
+                                <input type="text" class="form-control" placeholder="생년월일을 입력해주세요" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -70,7 +70,7 @@
                             <div>이메일</div>
                       		<div style="font-size: 5px;"><br/></div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="이메일을 입력해주세요">
+                                <input type="text" class="form-control" placeholder="이메일을 입력해주세요" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         
@@ -79,7 +79,8 @@
                             </div>
                             <div style="font-size: 5px;"><br/></div>
                             <div class="input-group mb-3">
-                                  <button type="submit" style="" class="btn btn-success btn-block">확인 </button>
+                                  <button type="button" id='find_id' onclick="findId_click()" class="btn btn-success btn-block" >find</button>
+								  <button type="button" onclick="history.go(-1);" class="btn btn-success btn-block" >Cancel</button>
                             </div>
                            
                         </form>

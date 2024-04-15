@@ -12,7 +12,7 @@
 		
 		<br/><br/>
 		<div style="text-align: center">
-			<img src="<%=request.getContextPath() %>/resources/statics/mpicture.png">
+			<img src="<%=request.getContextPath() %>/resources/statics/main.png">
 		</div>
 		<br/><br/>
 		

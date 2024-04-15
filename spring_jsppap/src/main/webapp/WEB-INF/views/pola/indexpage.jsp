@@ -21,7 +21,7 @@
 		 
 		      <c:forEach items="${menuList }" var="menu">
 		      <li >
-		        <a href="javascript:subMenu_go('${menu.mcode }');goPage('<%=request.getContextPath() %>${menu.murl}','${menu.mcode }');" class="nav-link">${menu.mname }</a>
+		       <a href="javascript:goPage('<%=request.getContextPath() %>${menu.murl}','${menu.mcode }');" class="nav-link">${menu.mname }</a>
 		      </li>
 		      </c:forEach>
 		    </ul>
@@ -41,6 +41,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
 <!-- handlebars  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
 <script type="text/x-handlebars-template"  id="subMenu-list-template" >
 {{#each .}}		
 <li class="nav-item subMenu" >
@@ -71,22 +72,22 @@ function subMenu_go(mCode){
 	});
 }
 function goPage(url,mCode){
-	
-	$('iframe[name="ifr"]').attr("src",url);
-	
-	
-	
-	var renewURL = location.href;
-	//현재 주소 중 .do 뒤 부분이 있다면 날려버린다.
-	renewURL = renewURL.substring(0, renewURL.indexOf(".do")+3);
-	
-	if(mCode != 'M000000'){
-		renewURL += "?mCode="+mCode;
-	}
-	//페이지를 리로드하지 않고 페이지 주소만 변경할 때 사용
-	history.pushState(mCode,null,renewURL);
+	//alert(url+":"+mCode);
+ 
+    $('iframe[name="ifr"]').attr("src",url);
+
+   var renewURL = location.href;
+   //현재 주소 중 .do 뒤 부분이 있다면 날려버린다.
+   renewURL = renewURL.substring(0, renewURL.indexOf(".do")+3);
+   
+   if (mCode != 'M000000') {
+       renewURL += "?mCode="+mCode;
+   }
+   //페이지를 리로드하지 않고 페이지 주소만 변경할 때 사용
+   history.pushState(mCode, null, renewURL);
 }
 </script>
+
 <c:if test="${not empty menu}">
 <script>
 goPage('<%=request.getContextPath()%>${menu.murl}','${menu.mcode}');
@@ -94,5 +95,6 @@ subMenu_go('${menu.mcode}'.substring(0,3)+"0000");
 
 </script>
 </c:if>
+
 </body>
 </html>
