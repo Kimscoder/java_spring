@@ -30,7 +30,7 @@
 						    <h3 class="" style="text-align:left; color: black; margin-left: 5px; margin-bottom: 0px;">아이디찾기</h3>
 						</div>
 						<br/>
-						<form action="../../index3.html" method="post">
+						<form action="searchid" method="post">
                         	<div>이름
                         		<div style="font-size: 5px;"><br/></div>
                         	</div>
@@ -70,7 +70,7 @@
                             <div>이메일</div>
                       		<div style="font-size: 5px;"><br/></div>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="이메일을 입력해주세요" required>
+                                <input id="email" type="text" class="form-control" placeholder="이메일을 입력해주세요" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         
@@ -79,15 +79,14 @@
                             </div>
                             <div style="font-size: 5px;"><br/></div>
                             <div class="input-group mb-3">
-                                  <button type="button" id='find_id' onclick="findId_click()" class="btn btn-success btn-block" >find</button>
-								  <button type="button" onclick="history.go(-1);" class="btn btn-success btn-block" >Cancel</button>
-                            </div>
-                           
+                                  <button type="submit" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>
+								  <button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>                            </div>
+                          
                         </form>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+</div>
 </body>
 </html>

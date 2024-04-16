@@ -36,7 +36,7 @@
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="id" class="form-control" name="id"placeholder="아이디를 입력해주세요" value="">
+                                <input type="id" class="form-control" name="id" placeholder="아이디를 입력해주세요" value="" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -46,7 +46,7 @@
                             <div>Password</div>
                       		<div style="font-size: 5px;"><br/></div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" name="pwd" placeholder="비밀번호를 입력해주세요" value="">
+                                <input type="password" class="form-control" name="pwd" placeholder="비밀번호를 입력해주세요" value="" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         

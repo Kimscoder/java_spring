@@ -2,12 +2,14 @@ package com.spring.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -96,17 +98,40 @@ public class loginController {
 		return mnv;
 	}
 	
+	@PostMapping("/searchid")
+	public ModelAndView searchId(@RequestParam String email, 
+	                             ModelAndView mnv) throws Exception{
+	    // 서비스 레이어에서 해당 이메일에 대한 아이디를 찾는 로직 호출
+	    String memberId = memberService.findMemberId(email);
+
+	    // ModelAndView에 아이디 추가
+	    mnv.addObject("id", memberId);
+
+	    // 결과를 보여줄 뷰 설정
+	    mnv.setViewName("/login/find_id");
+
+	    return mnv;
+	}
+	
 	@GetMapping("/searchpwd")
-	public ModelAndView serchPwd(ModelAndView mnv)throws Exception{
+	public ModelAndView searchPwd(ModelAndView mnv)throws Exception{
 		String url = "/login/searchpwd";
 		
 		mnv.setViewName(url);
 		return mnv;
 	}
 	
-	@GetMapping("/transit")
+	@PostMapping("/searchpwd")
+	public ModelAndView searchPwd(ModelAndView mnv)throws Exception{
+		String url = "/login/searchpwd";
+		
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
+	@GetMapping("/transor")
 	public ModelAndView transit(ModelAndView mnv)throws Exception{
-		String url = "/pola/transit";
+		String url = "/pola/transor";
 		
 		mnv.setViewName(url);
 		return mnv;

@@ -10,4 +10,6 @@ public interface MemberService {
 	memberVO login(String id, String pwd)throws NotFoundIdentityException,
 												InvalidPasswordException,
 												SQLException;
+	String findMemberId(String email) throws Exception;
 	}
+

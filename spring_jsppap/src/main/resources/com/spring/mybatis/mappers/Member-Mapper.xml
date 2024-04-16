@@ -10,5 +10,11 @@
 	    where id=#{id}
 	</select>
 	
+	<select id="findMemberId" parameterType="str" resultType="str">
+	    SELECT id
+	    FROM member
+	    WHERE email=#{email} 
+	    
+	</select>
 
 	</mapper>

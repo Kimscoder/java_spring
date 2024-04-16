@@ -18,4 +18,14 @@ public class memberDAOImpl implements memberDAO{
 		
 		return session.selectOne("Member-Mapper.selectMemberById",id);
 	}
+
+	@Override
+	public String findMemberId(String email) throws SQLException {
+	
+		return session.selectOne("Member-Mapper.findMemberId",email);
+	}
+
+	
+
+	
 }

@@ -8,3 +8,8 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 							+ winleft +", resizable=yes, status=yes"  );
 	win.focus() ; 
 }
+function CloseWindow(){
+	
+	window.opener.location.reload(true);		
+	window.close();
+}

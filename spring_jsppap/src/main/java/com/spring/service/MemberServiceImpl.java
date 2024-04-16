@@ -26,4 +26,21 @@ public class MemberServiceImpl implements MemberService{
 		return member;
 	}
 	
+
+	@Override
+	public String findMemberId(String email) throws Exception {
+		String id= memberDAO.findMemberId(email);
+		
+		if (id ==null) {
+			System.out.println("<script>");
+			System.out.println("alert('가입된 아이디가 없습니다.');");
+			System.out.println("history.go(-1);");
+			System.out.println("</script>");
+			
+			return null;
+		}else {
+			return id;
+		}
+		
+	}
 }
