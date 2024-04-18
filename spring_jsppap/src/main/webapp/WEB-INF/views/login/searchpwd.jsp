@@ -36,7 +36,7 @@
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="name" class="form-control" placeholder="농장주명을 입력해주세요">
+                                <input name="id" type="text" class="form-control" placeholder="농장주명을 입력해주세요">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -46,7 +46,7 @@
                             <div>이메일</div>
                       		<div style="font-size: 5px;"><br/></div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="이메일을 입력해주세요">
+                                <input name="email" type="text" class="form-control" placeholder="이메일을 입력해주세요">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +38,7 @@
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="name" class="form-control" placeholder="농장주명을 입력해주세요" required>
+                                <input type="text" name="name" class="form-control" placeholder="농장주명을 입력해주세요" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -48,7 +50,7 @@
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="phone" class="form-control" placeholder="'-'빼고 숫자만 입력" required>
+                                <input type="text" name="phone" class="form-control" placeholder="'-'빼고 숫자만 입력" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -60,7 +62,7 @@
                         	</div>
                         	
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="생년월일을 입력해주세요" required>
+                                <input type="text" name="birthdate" class="form-control" placeholder="생년월일을 입력해주세요" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                        
@@ -70,7 +72,7 @@
                             <div>이메일</div>
                       		<div style="font-size: 5px;"><br/></div>
                             <div class="input-group mb-3">
-                                <input id="email" type="text" class="form-control" placeholder="이메일을 입력해주세요" required>
+                                <input id="email" type="text" name="email" class="form-control" placeholder="이메일을 입력해주세요" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         

@@ -16,5 +16,8 @@
 	    WHERE email=#{email} 
 	    
 	</select>
-
+	
+	<update id="update_pw" parameterType="member">
+		update member set pwd=#{pwd} where id=#{id} 
+	</update>
 	</mapper>

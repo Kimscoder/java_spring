@@ -99,7 +99,7 @@ public class loginController {
 	}
 	
 	@PostMapping("/searchid")
-	public ModelAndView searchId(@RequestParam String email, 
+	public ModelAndView searchId(@RequestParam("email") String email, 
 	                             ModelAndView mnv) throws Exception{
 	    // 서비스 레이어에서 해당 이메일에 대한 아이디를 찾는 로직 호출
 	    String memberId = memberService.findMemberId(email);
@@ -114,7 +114,7 @@ public class loginController {
 	}
 	
 	@GetMapping("/searchpwd")
-	public ModelAndView searchPwd(ModelAndView mnv)throws Exception{
+	public ModelAndView searchpwd(ModelAndView mnv)throws Exception{
 		String url = "/login/searchpwd";
 		
 		mnv.setViewName(url);
@@ -122,10 +122,10 @@ public class loginController {
 	}
 	
 	@PostMapping("/searchpwd")
-	public ModelAndView searchPwd(ModelAndView mnv)throws Exception{
-		String url = "/login/searchpwd";
+	public ModelAndView searchPwd(ModelAndView mnv,memberVO member)throws Exception{
+		memberService.findpwd(member);
 		
-		mnv.setViewName(url);
+		mnv.setViewName("redirect:/login/findpw");
 		return mnv;
 	}
 	
