@@ -13,4 +13,6 @@ public interface MenuService {
 	MenuVO getMenuByMcode(String mCode)throws SQLException;
 	
 	MenuVO getMenuByMname(String mName)throws SQLException;
+	
+	
 }

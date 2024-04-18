@@ -30,7 +30,7 @@
 						    <h3 class="" style="text-align:left; color: black; margin-left: 5px; margin-bottom: 0px;">비밀번호 찾기</h3>
 						</div>
 						<br/>
-						<form action="../../index3.html" method="post">
+						<form action="searchpwd" method="post">
                         	<div>아이디
                         		<div style="font-size: 5px;"><br/></div>
                         	</div>

@@ -13,9 +13,7 @@ public interface MemberService {
 												InvalidPasswordException,
 												SQLException;
 	String findMemberId(String email) throws Exception;
+
 	
-	void sendEmail(memberVO member, String div) throws Exception;
-	
-	void findpwd(memberVO member) throws Exception;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 	}
 

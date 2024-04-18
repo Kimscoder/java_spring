@@ -2,10 +2,13 @@ package com.spring.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +29,9 @@ public class loginController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
 	
 	@Autowired
 	private memberDAO MemberDAO;
@@ -122,10 +128,9 @@ public class loginController {
 	}
 	
 	@PostMapping("/searchpwd")
-	public ModelAndView searchPwd(ModelAndView mnv,memberVO member)throws Exception{
-		memberService.findpwd(member);
+	public ModelAndView searchPwd(ModelAndView mnv,memberVO member){
 		
-		mnv.setViewName("redirect:/login/findpw");
+		mnv.setViewName("/login/findpw");
 		return mnv;
 	}
 	
@@ -154,5 +159,27 @@ public class loginController {
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
+	@Async
+	public void sendMail(String to , String subject, String body)
+	{
+		MimeMessage message = mailSender.createMimeMessage();
+		try {
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8"); 
+			
+			//메일 수신 시 표시될 이름 설정
+			messageHelper.setFrom("전달받은 상대에게 표시될 메일 주소","전달 받은 상대에게 표시될 이름");
+			messageHelper.setSubject(subject);
+			messageHelper.setTo(to);
+			messageHelper.setText(body);
+			mailSender.send(message);
+			
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
 	
 }
