@@ -14,6 +14,9 @@ public interface MemberService {
 												SQLException;
 	String findMemberId(String email) throws Exception;
 
+	void modifypwd(memberVO member)throws SQLException;
+	void sendEmail(String useremail,String text) throws Exception;
+	memberVO findMemberinfo(String email)throws SQLException;
 	
-	}
+}
 

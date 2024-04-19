@@ -1,46 +1,60 @@
 package com.spring.controller;
 
-import java.io.UnsupportedEncodingException;
+import javax.servlet.http.HttpServletResponse;
 
-import javax.activation.DataSource;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import org.apache.commons.mail.HtmlEmail;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import com.spring.dto.memberVO;
+import com.spring.service.MemberService;
 
 public class MailUtils {
-	private JavaMailSender mailSender;
-	private MimeMessage message;
-	private MimeMessageHelper messageHelper;
+	@Autowired  MemberService memberService;
 	
-	public MailUtils(JavaMailSender mailSender) throws MessagingException{
-		this.mailSender=mailSender;
-		message = this.mailSender.createMimeMessage();
-		messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+	public void sendEmail(memberVO member) throws Exception{
+		//Mail Server 설정
+		String charSet ="utf-8";
+		String hostSMTP="smtp.gmail.com";
+		String hostSMTPid="mkj425946@gmail.com";
+		String hostSMTPpw="rkwhr40033512";
+		
+		String fromEmail="mkj425946@gmail.com";
+		String fromName="UNO Farm";
+		
+		String subject="임시비밀번호 입니다";
+		String msg="";
+		
+		msg +="<div align='left'";
+		msg +="<h3>";
+		msg +=member.getId() + "님의 임시 비밀번호입니다. <br>로그인 후 비밀번호를 변경해 주세요</h3>";
+		msg +="<p>임시 비밀번호:";
+		msg +=member.getPwd() + "</p></div>";
+		
+		//email전송
+		String mailRecipient=member.getEmail();//받는 사람 이메일 주소
+		try {
+			//객체 선언
+			HtmlEmail mail = new HtmlEmail();
+			mail.setDebug(true);
+			mail.setCharset(charSet);
+			mail.setSSLOnConnect(true);
+			mail.setHostName(hostSMTP);
+			mail.setSmtpPort(587); 
+			mail.setAuthentication(hostSMTPid, hostSMTPpw);
+			mail.setStartTLSEnabled(true);
+			mail.addTo(mailRecipient,charSet);
+			mail.setFrom(fromEmail, fromName, charSet);
+			mail.setSubject(subject);
+			mail.setHtmlMsg(msg);
+			mail.send();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void findPw(HttpServletResponse response,memberVO member) {
+		response.setContentType("text/html;charset=utf-8");
 		
 	}
-	public void setSubject(String subject) throws MessagingException {
-        messageHelper.setSubject(subject);	// 메일 제목
-    }
-
-    public void setText(String htmlContent) throws MessagingException {
-        messageHelper.setText(htmlContent, true);	// 메일 내용
-    }
-
-    public void setFrom(String email, String name) throws UnsupportedEncodingException, MessagingException {
-        messageHelper.setFrom(email, name);		// 보내는 사람
-    }
-
-    public void setTo(String email) throws MessagingException {
-        messageHelper.setTo(email);		// 받을 사람
-    }
-
-    public void addInline(String contentId, DataSource dataSource) throws MessagingException {	// addInline(삽입될 이미지의 id 애트리뷰트명, 파일의 경로)
-        messageHelper.addInline(contentId, dataSource);		// 이미지 삽입
-    }
-
-    public void send() {
-        mailSender.send(message);		// 메일 전송
-    }
 }
+

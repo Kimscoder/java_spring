@@ -25,6 +25,23 @@ public class memberDAOImpl implements memberDAO{
 		return session.selectOne("Member-Mapper.findMemberId",email);
 	}
 
+	@Override
+	public void updatePwd(memberVO member) throws SQLException {
+		session.update("Member-Mapper.updatepwd",member);
+		
+	}
+
+	@Override
+	public memberVO searchpwd(memberVO member) throws SQLException {
+		
+		return session.selectOne("Member-Mapper.searchPwd",member);
+	}
+
+	@Override
+	public memberVO findMemberinfo(String email) throws SQLException {
+		return session.selectOne("Member-Mapper.findMemberinfo", email);
+	}
+
 	
 
 	

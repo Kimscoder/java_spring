@@ -17,7 +17,23 @@
 	    
 	</select>
 	
-	<update id="update_pw" parameterType="member">
-		update member set pwd=#{pwd} where id=#{id} 
+	<update id="updatepwd" parameterType="member">
+		update member 
+		set pwd=#{pwd} 
+		where email=#{email} 
 	</update>
+	
+	<select id="searchPwd" parameterType="member" resultType="member">
+		select * 
+		from member
+		where id=#{id} and email=#{email}
+	</select>
+	
+	<select id="findMemberinfo" parameterType="str" resultType="member">
+	    SELECT *
+	    FROM member
+	    WHERE email=#{email} 
+	    
+	</select>
+	
 	</mapper>

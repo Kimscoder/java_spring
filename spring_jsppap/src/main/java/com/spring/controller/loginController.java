@@ -1,18 +1,21 @@
 package com.spring.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,8 +33,7 @@ public class loginController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	private JavaMailSenderImpl mailSender;
+
 	
 	@Autowired
 	private memberDAO MemberDAO;
@@ -107,20 +109,19 @@ public class loginController {
 	@PostMapping("/searchid")
 	public ModelAndView searchId(@RequestParam("email") String email, 
 	                             ModelAndView mnv) throws Exception{
-	    // 서비스 레이어에서 해당 이메일에 대한 아이디를 찾는 로직 호출
+	    
 	    String memberId = memberService.findMemberId(email);
 
-	    // ModelAndView에 아이디 추가
 	    mnv.addObject("id", memberId);
 
-	    // 결과를 보여줄 뷰 설정
+	 
 	    mnv.setViewName("/login/find_id");
 
 	    return mnv;
 	}
 	
 	@GetMapping("/searchpwd")
-	public ModelAndView searchpwd(ModelAndView mnv)throws Exception{
+	public ModelAndView serchPwd(ModelAndView mnv)throws Exception{
 		String url = "/login/searchpwd";
 		
 		mnv.setViewName(url);
@@ -128,10 +129,20 @@ public class loginController {
 	}
 	
 	@PostMapping("/searchpwd")
-	public ModelAndView searchPwd(ModelAndView mnv,memberVO member){
+	public ModelAndView searchPwd(@RequestParam("email") String email,
+	                             ModelAndView mnv) throws Exception{
+		memberVO vo1 = memberService.findMemberinfo(email);
+		System.out.println(vo1.getId());
+		String tempPw=UUID.randomUUID().toString().replace("-", "");//-를 제거
+		tempPw = tempPw.substring(0,10);//tempPw를 앞에서부터 10자리 잘라줌
 		
+		vo1.setPwd(tempPw);
+		
+		memberService.modifypwd(vo1);
+		memberService.sendEmail(email, tempPw);
+		mnv.addObject("email",email);	
 		mnv.setViewName("/login/findpw");
-		return mnv;
+	    return mnv;
 	}
 	
 	@GetMapping("/transor")
@@ -158,27 +169,6 @@ public class loginController {
 		
 		mnv.setViewName(url);
 		return mnv;
-	}
-	
-	@Async
-	public void sendMail(String to , String subject, String body)
-	{
-		MimeMessage message = mailSender.createMimeMessage();
-		try {
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8"); 
-			
-			//메일 수신 시 표시될 이름 설정
-			messageHelper.setFrom("전달받은 상대에게 표시될 메일 주소","전달 받은 상대에게 표시될 이름");
-			messageHelper.setSubject(subject);
-			messageHelper.setTo(to);
-			messageHelper.setText(body);
-			mailSender.send(message);
-			
-		} catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
-		
 	}
 
 	
